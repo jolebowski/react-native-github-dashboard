@@ -14,7 +14,7 @@ async function repositories (username: string): Promise<userName | null>{
         .then((res) =>res.json())
         result = listRepositories
     } catch (error) {
-        Alert.alert("L'utilisateur n'existe pas")
+        Alert.alert("The user doesn't exist")
     }  
     return result
 }
