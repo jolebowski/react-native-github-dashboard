@@ -1,27 +1,59 @@
-import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native'
-import { TextInput, Button  } from 'react-native-paper';
+import React, {useState, FC} from 'react';
+import {View, StyleSheet, Alert} from 'react-native'
+import { TextInput, Button } from 'react-native-paper';
+import repositories from '../services/api'
 
-const InputSearch = () => (
-    <View style={styles.container}>
+type Props = {
+  navigation: any
+}
+
+const InputSearch: FC<Props> = ({navigation}) => {
+  
+  const [username, setUsername] = useState('');
+
+  const handlePress = async () => {
+    if(username.length == 0){
+      Alert.alert('Warning, please write your username')
+    }else{
+      const listRepositories = await repositories(username)
+      if(listRepositories){
+        navigation.navigate('ListRepository', {
+          repos: listRepositories,
+        });
+      }
+      setUsername("")
+    }
+  } 
+
+  return(
+    <>
+      <View style={styles.container}>
         <TextInput
             label="Username"
             style={styles.input}
+            onChangeText={(value) => setUsername(value)}
+            value={username}
         />
-        <Button style={styles.button} 
+        <Button 
+            onPress={handlePress}
+            style={styles.button} 
             mode="contained">search
         </Button>
-    </View>
+      </View>
+    </>
+  )
+}
 
-)
 export default InputSearch
 
 const styles = StyleSheet.create({
     container: {
-      display:'flex',
-      flexDirection:'row',
-      justifyContent: 'center',
-      alignItems: 'center',
+      flex: 1, 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      flexDirection:"row",
+      backgroundColor:'#fff',
+
     },
     input: {
       width: 210, 

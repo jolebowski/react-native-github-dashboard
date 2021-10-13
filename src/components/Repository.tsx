@@ -1,23 +1,32 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import React, {FC} from 'react'
+import {StyleSheet, Text } from 'react-native';
+import {Card, Title, Paragraph } from 'react-native-paper';
 
-const LeftContent = props => <Avatar.Image source={require('../assets/imgFromLinkedin.jpg')} size={40} />
-
-const Repository = () => (
-    <Card style={styles.card}>
-        <Card.Title subtitleStyle={styles.cardSubtitle} 
-        titleStyle={styles.cardTitle} title="jolebowski" 
-        subtitle="https://github.com/jolebowski/Camp-Us" 
-        left={LeftContent} />
-        <Card.Content style={styles.cardContent}>
-        <Title>aero.js</Title>
-        <Paragraph>javascript</Paragraph>
-        <Text style={styles.cardText}>Minimaslistic Javascript MVC libray</Text>
-        </Card.Content>
-    </Card>    
+type Props = {
+    item: {
+        description:string,
+        html_url: string,
+        language: string,
+        owner: {
+            login:string
+        },
+        name:string
+    },
+ }
+const Repository: FC<Props> = ({item}) => {
+    return(
+        <Card style={styles.card}>
+            <Card.Title subtitleStyle={styles.cardSubtitle} 
+            titleStyle={styles.cardTitle} title={item.owner.login} 
+            subtitle={item.html_url} />
+            <Card.Content style={styles.cardContent}>
+            <Title>{item.name}</Title>
+            <Paragraph>{item.description}</Paragraph>
+            <Text style={styles.cardText}>{item.language}</Text>
+            </Card.Content>
+        </Card>
  );
-
+}
 export default Repository
 
 const styles = StyleSheet.create({

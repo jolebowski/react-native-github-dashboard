@@ -1,26 +1,25 @@
 import  React from 'react';
-import {View, StyleSheet } from 'react-native';
-// import Header from './src/components/Header'
-// import InputSearch from './src/components/InputSearch'
-// import Profile from './src/components/Profile'
-import Home from './src/screens/Home';
+import {NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import CustomNavigationBar from './src/components/CustomNavigationBar'
+import { RooStackParamList} from './src/screens/Root';
+import HomeScreen from './src/screens/HomeScreen';
+import ListRepositoryScreen from './src/screens/ListRepositoryScreen'
+import RepositoryScreen from './src/screens/RepositoryScreen';
 
+const Stack = createStackNavigator<RooStackParamList>();
 
 const App = () => (
-      // <Header />
-    <Home />
-  )
-      {/* <Profile/> */}
-      {/* <InputSearch /> */}
- //);
-
- const styles = StyleSheet.create({
-  // container: {
-  //     // flex: 1,
-  //     // justifyContent: 'center',
-  //     // alignItems: 'center',
-  //     // flexDirection:'column'
-  // }
-})
-
+    <NavigationContainer>
+     <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          header: CustomNavigationBar,
+        }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ListRepository" component={ListRepositoryScreen} />
+        <Stack.Screen name="Repository" component={RepositoryScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+)
 export default App
