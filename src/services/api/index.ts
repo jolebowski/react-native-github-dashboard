@@ -5,12 +5,17 @@ type userName = {
     username: string,
 }
 
-async function repositories (username: string): Promise<userName | null>{
+export async function profile (username: string){
+    const profile = await fetch(`${BASE_URL}${username}`)
+    .then((res) => res.json())
+    return profile 
+}
+
+export async function repositories (username: string): Promise<userName>{
     let result 
     try {
-        const profile = await fetch(`${BASE_URL}${username}`)
-        .then((res) => res.json())
-        const listRepositories = await fetch(profile.repos_url)
+        const user = await profile(username)        
+        const listRepositories = await fetch(user.repos_url)
         .then((res) =>res.json())
         result = listRepositories
     } catch (error) {
@@ -18,5 +23,3 @@ async function repositories (username: string): Promise<userName | null>{
     }  
     return result
 }
-
-export default repositories

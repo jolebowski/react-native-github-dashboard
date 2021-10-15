@@ -4,15 +4,16 @@ import { StyleSheet } from 'react-native';
 
 type Props = {
   navigation: any,
-  back?: any
+  back?: any,
+  title?: string
 }
 
-const CustomNavigationBar: FC<Props> = ({navigation, back}) => {
+const CustomNavigationBar: FC<Props> = ({navigation, back, title = 'Github Dashboard Sample'}) => {
   return(
     <Appbar.Header style={styles.bar}>
       {back ? <Appbar.BackAction color="white" onPress={navigation.goBack} />
        : <Appbar.Action color="white" icon="menu" />}
-      <Title  style={styles.title}>Github Dashboard Sample</Title>
+      <Title  style={styles.title}>{title}</Title>
     </Appbar.Header>
   );
 }

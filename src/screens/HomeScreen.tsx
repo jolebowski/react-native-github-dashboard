@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigation} from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RooStackParamList } from './Root';
+import { RootStackParamList } from './Root';
 import InputSearch from '../components/InputSearch'
 
-type homeScreenProp = StackNavigationProp<RooStackParamList, 'Home'>;
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen = () => {
     const navigation = useNavigation<homeScreenProp>();    

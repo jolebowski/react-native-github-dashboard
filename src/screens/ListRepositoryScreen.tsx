@@ -1,19 +1,19 @@
 import React from 'react'
 import { useNavigation, RouteProp, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RooStackParamList } from './Root';
+import { RootStackParamList } from './Root';
 import ListRepository from '../components/ListRepository'
 
-type ListRepositoryScreenProp = StackNavigationProp<RooStackParamList, 'ListRepository'>;
-type ListRepositoryScreenRouteProp = RouteProp<RooStackParamList, 'ListRepository'>;
+type ListRepositoryScreenProp = StackNavigationProp<RootStackParamList, 'ListRepository'>;
+type ListRepositoryScreenRouteProp = RouteProp<RootStackParamList, 'ListRepository'>;
 
 const ListRepositoryScreen = () => {
     const navigation = useNavigation<ListRepositoryScreenProp>();
     const route = useRoute<ListRepositoryScreenRouteProp>();
-    const { repos } = route.params;
+    const { repos, user } = route.params;
     
     return(
-        <ListRepository repos={repos} navigation={navigation} />
+        <ListRepository repos={repos} user={user} navigation={navigation} />
     )
 }
 

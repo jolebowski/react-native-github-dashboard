@@ -1,7 +1,7 @@
 import React, {useState, FC} from 'react';
 import {View, StyleSheet, Alert} from 'react-native'
 import { TextInput, Button } from 'react-native-paper';
-import repositories from '../services/api'
+import {repositories, profile} from '../services/api'
 
 type Props = {
   navigation: any
@@ -16,9 +16,12 @@ const InputSearch: FC<Props> = ({navigation}) => {
       Alert.alert('Warning, please write your username')
     }else{
       const listRepositories = await repositories(username)
+      const userProfile = await profile(username)
+
       if(listRepositories){
         navigation.navigate('ListRepository', {
           repos: listRepositories,
+          user: userProfile
         });
       }
       setUsername("")

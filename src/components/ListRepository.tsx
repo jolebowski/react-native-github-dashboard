@@ -1,17 +1,29 @@
 import React, {FC} from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import { List, Button} from 'react-native-paper';
+import { FlatList, StyleSheet, View, Image } from 'react-native'
+import { List, Button,Chip} from 'react-native-paper';
 
 type ListRepositoryProps = {
    repos?: {
        url :string
    }[] ,
+   user: {
+    avatar_url: string,
+    login:string
+   }   
    navigation: any,
 }
 
-const ListRepository: FC<ListRepositoryProps> = ({repos, navigation}) => {
+const ListRepository: FC<ListRepositoryProps> = ({repos, navigation, user}) => {
     return (
         <>
+        <View style={styles.containerProfile}>
+        <Chip avatar={<Image
+            style={styles.photoProfile}
+            source={{uri:user.avatar_url}} 
+            />}>
+            {user.login}
+        </Chip>
+        </View>
         <FlatList 
             data={repos}
             renderItem={({item}) =>
@@ -34,6 +46,15 @@ const ListRepository: FC<ListRepositoryProps> = ({repos, navigation}) => {
 export default ListRepository;
 
 const styles = StyleSheet.create({
+    photoProfile:{
+        width: 30,
+        height: 30,
+    },
+    containerProfile:{
+        alignItems:"center",
+        marginBottom: 10,
+        marginTop: 15,
+    },
     container: {
         borderBottomWidth:1
     },

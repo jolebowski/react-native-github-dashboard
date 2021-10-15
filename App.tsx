@@ -2,12 +2,12 @@ import  React from 'react';
 import {NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import CustomNavigationBar from './src/components/CustomNavigationBar'
-import { RooStackParamList} from './src/screens/Root';
+import { RootStackParamList} from './src/screens/Root';
 import HomeScreen from './src/screens/HomeScreen';
 import ListRepositoryScreen from './src/screens/ListRepositoryScreen'
 import RepositoryScreen from './src/screens/RepositoryScreen';
 
-const Stack = createStackNavigator<RooStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => (
     <NavigationContainer>
